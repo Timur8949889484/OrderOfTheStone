@@ -100,7 +100,7 @@ let brokenBlocksMap: Uint8Array,
   queue: Int32Array,
   blockTypeMap: Uint8Array;
 
-function ensureBuffers(w: number, d: number, total3DCells: number) {
+function ensureBuffers(_w: number, _d: number, total3DCells: number) {
   if (cached3DSize < total3DCells) {
     cached3DSize = total3DCells;
     brokenBlocksMap = new Uint8Array(total3DCells);

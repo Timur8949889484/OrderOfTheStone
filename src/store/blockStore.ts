@@ -1,5 +1,3 @@
-const BLOCK_SIZE = 1.5;
-
 type Listener = (x: number, y: number, z: number) => void;
 
 class BlockStore {
