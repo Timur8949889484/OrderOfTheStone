@@ -3,10 +3,15 @@ import { BLOCK_STONE, BLOCK_OAK_LOG, BLOCK_OAK_LEAVES } from "./constants";
 
 const textureLoader = new THREE.TextureLoader();
 
+// Достаем базовый путь из настроек Vite (в нашем случае это /OrderOfTheStone/)
+const BASE_URL = import.meta.env.BASE_URL;
+
 // ===============================================
 // 1. АТЛАС ДЛЯ МИРА
 // ===============================================
-export const atlasTexture = textureLoader.load("/textures/atlas.webp");
+export const atlasTexture = textureLoader.load(
+  `${BASE_URL}textures/atlas.webp`,
+);
 // magFilter отвечает за вид ВБЛИЗИ. Оставляем Nearest, чтобы блоки были пиксельными и четкими.
 atlasTexture.magFilter = THREE.NearestFilter;
 
@@ -81,16 +86,16 @@ function loadParticleTexture(path: string) {
 }
 
 export const dirtTexture = loadParticleTexture(
-  "/textures/dirt_grass/Dirt_(texture).webp",
+  `${BASE_URL}textures/dirt_grass/Dirt_(texture).webp`,
 );
 export const stoneTexture = loadParticleTexture(
-  "/textures/stone/Stone_(texture).webp",
+  `${BASE_URL}textures/stone/Stone_(texture).webp`,
 );
 export const oakLogSideTexture = loadParticleTexture(
-  "/textures/oak_tree/Oak_Log_(texture).webp",
+  `${BASE_URL}textures/oak_tree/Oak_Log_(texture).webp`,
 );
 export const oakLeavesTexture = loadParticleTexture(
-  "/textures/oak_tree/Oak_Leaves_(texture).webp",
+  `${BASE_URL}textures/oak_tree/Oak_Leaves_(texture).webp`,
 );
 
 export function getBlockTexture(blockType: number): THREE.Texture {
@@ -102,7 +107,7 @@ export function getBlockTexture(blockType: number): THREE.Texture {
 
 export const crackMaterials = Array.from({ length: 10 }).map((_, stage) => {
   const texture = textureLoader.load(
-    "/textures/destroy/destroy_stage_" + stage + ".png",
+    `${BASE_URL}textures/destroy/destroy_stage_${stage}.png`,
   );
   texture.magFilter = THREE.NearestFilter;
   texture.minFilter = THREE.NearestFilter;
