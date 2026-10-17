@@ -1,0 +1,60 @@
+$block-size: 40px;
+$player-height: 80px;
+
+.player {
+  width: $block-size;
+  height: $player-height;
+  position: absolute;
+  left: calc(var(--x) * #{$block-size});
+  top: calc(var(--y) * #{$block-size} - 20px);
+
+  // ИСПРАВЛЕНИЕ: Добавили rotateZ перед rotateX, чтобы игрок поворачивался за мышкой!
+  transform: translateZ(calc(var(--z) * #{$block-size} + 20px))
+    rotateZ(calc(var(--yaw) * -1deg)) rotateX(-90deg);
+
+  transform-style: preserve-3d;
+
+  .face {
+    position: absolute;
+    width: $block-size;
+    height: $player-height;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #e53935;
+
+    // ИСПРАВЛЕНИЕ: Не рисуем заднюю (внутреннюю) сторону граней, чтобы не мешать камере
+    backface-visibility: hidden;
+  }
+
+  .front {
+    transform: rotateY(0deg) translateZ($block-size / 2);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; // Прижимаем маркер к верхней части головы
+
+    .face-marker {
+      width: 10px;
+      height: 10px;
+      background-color: black;
+      border-radius: 50%;
+      margin-top: 15px; // Черный круг находится ровно в 15px от макушки
+    }
+  }
+  .back {
+    transform: rotateY(180deg) translateZ($block-size / 2);
+  }
+  .left {
+    transform: rotateY(-90deg) translateZ($block-size / 2);
+  }
+  .right {
+    transform: rotateY(90deg) translateZ($block-size / 2);
+  }
+
+  .top {
+    width: $block-size;
+    height: $block-size;
+    top: 0;
+    transform: rotateX(90deg) translateZ($block-size / 2);
+    background-color: #ff5252;
+  }
+}
